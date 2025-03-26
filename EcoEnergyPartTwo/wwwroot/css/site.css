@@ -1,0 +1,208 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+html, body {
+    height: 100%;
+    margin: 0;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+main {
+    flex: 1;
+    display: block;
+}
+body {
+    margin-bottom: 0;
+}
+
+/*HEADER*/
+header {
+    background-image: url("../Resources/Images/banner_image.jpg");
+    background-position: top;
+    min-height: 150px;
+    width: 100%;
+    border-bottom: solid darkgreen 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 25px;
+    padding-left: 25px;
+    border-radius: 20px;
+}
+header nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 50px;
+}
+header nav a {
+    color: white; 
+    text-decoration: none; 
+    padding-right: 15px;
+}
+header nav a:hover {
+    color: lightgreen;
+}
+
+/*FOOTER*/
+footer {
+    background-image: url("../Resources/Images/banner_image.jpg");
+    background-position: center;
+    min-height: 100px;
+    width: 100%;
+    border-top: solid darkgreen 5px;
+    margin-top: auto;
+    background-size: cover;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 30px;
+    border-radius: 20px;
+}
+
+footer p {
+    position: relative;
+    top: 7px;
+}
+
+/*IMAGES*/
+img {
+    border-radius: 20px;
+}
+#EcoCity {
+    width: 50%;
+}
+
+/*HOME PAGE*/
+#EcoHome {
+    padding-top: 50px;
+    padding-bottom: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#EcoInfo {
+    padding-left: 50px;
+    text-align: justify;
+    text-justify: inter-word;
+}
+#EcoInfo h1 {
+    padding-bottom: 30px;
+}
+
+/*SIMULATIONS*/
+#Form {
+    padding-top: 50px;
+}
+#Form div {
+    padding-top: 20px;
+}
+#SimulationList {
+    padding-top: 50px;
+}
+
+/*WATER CONSUMPTIONS*/
+#WaterConList {
+    padding-top: 50px;
+}
+#WaterConList.table{
+    word-wrap: break-word;
+}
+#WaterConList button{
+    margin-bottom: 30px;
+}
+.Statistics {
+    padding-top: 50px;
+    overflow-x: auto;
+    word-wrap: break-word;
+}
+.Statistics h4{
+    padding-bottom: 10px;
+}
+#LastStatistic {
+    padding-bottom: 50px;
+}
+
+/*BUTTONS*/
+.ButtonForm {
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    height: 50px;
+    width: 150px;
+    border-radius: 4px;
+    border: DarkGreen 4px double;
+    background-color: white;
+    color: DarkGreen;
+    transition: background-color 0.25s, border 0.05s;
+}
+.ButtonForm:hover {
+    border: white 4px double;
+    background-color: DarkGreen;
+    color: white;
+    transition: background-color 0.25s, border 0.05s, color 0.05s;
+}
+.ButtonLeft {
+    margin-top: 5px;
+    margin-bottom: 15px;
+    height: 50px;
+    width: 150px;
+    border-radius: 4px;
+    border: DarkGreen 4px double;
+    background-color: white;
+    color: DarkGreen;
+    transition: background-color 0.25s, border 0.05s;
+}
+.ButtonLeft:hover {
+    border: white 4px double;
+    background-color: DarkGreen;
+    color: white;
+    transition: background-color 0.25s, border 0.05s, color 0.05s;
+}
+
+/* ENERGY INDICATORS*/
+#EnergyIndList {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+.SlideTable {
+    overflow-x: auto;
+}
+#EnergyIndList button {
+    margin-bottom: 30px;
+}
+#EnergyIndList.table {
+    width: 100%;
+    table-layout: fixed;
+    word-wrap: break-word;
+    border-bottom: 1px solid #000;
+}
+table th, table td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+table thead {
+    border-bottom: 2px solid #000;
+}

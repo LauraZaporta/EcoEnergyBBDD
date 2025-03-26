@@ -1,0 +1,41 @@
+﻿@page
+@model EcoEnergyPartTwo.Pages.Simulations.SimulationModel
+@{
+    ViewData["Title"] = "Simulations";
+}
+
+<div id="SimulationList">
+    <h2>Llistat de Simulacions</h2>
+    @if (Model.Simulations.Count == 0)
+    {
+        <p>No hi ha cap simulació emmagatzemada.</p>
+    }
+    <p><strong>Total de simulacions:</strong> @Model.Simulations.Count</p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                @if (Model.Simulations.Any())
+                {
+                    // Mostrar les columnes de la primera fila (dinàmicament)
+                    foreach (var header in ((IDictionary<string, object>)Model.Simulations[0]).Keys)
+                    {
+                        <th>@header</th>
+                    }
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var simulation in Model.Simulations)
+            {
+                <tr>
+                    @foreach (var value in ((IDictionary<string, object>)simulation).Values)
+                    {
+                        <td>@value</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button onclick="window.location.href='/Simulations/AddSimulation'" class="ButtonLeft">Afegir Simulació</button>
+</div>
