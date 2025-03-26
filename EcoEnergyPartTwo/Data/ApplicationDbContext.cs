@@ -14,7 +14,7 @@ namespace EcoEnergyBBDD.Data
         {
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettingsconn.json")
+                .AddJsonFile("appsettings.json")
                 .Build();
 
             string connectionString = configuration.GetConnectionString("DefaultConnection");
