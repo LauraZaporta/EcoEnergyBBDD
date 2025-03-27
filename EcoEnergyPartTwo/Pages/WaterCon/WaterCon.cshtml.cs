@@ -3,7 +3,6 @@ using System.Globalization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using EcoEnergyPartTwo.Models;
 using EcoEnergyPartTwo.Models.Utilities;
-using System.Xml.Linq;
 using EcoEnergyBBDD.Models.BD;
 using EcoEnergyBBDD.CRUDs;
 using EcoEnergyBBDD.Data;

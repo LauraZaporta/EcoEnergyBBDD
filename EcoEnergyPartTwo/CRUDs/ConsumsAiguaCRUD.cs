@@ -25,7 +25,7 @@ namespace EcoEnergyBBDD.CRUDs
             var conToUpdate = context.ConsumsAigua.Find(con.Id);
             if (conToUpdate != null)
             {
-                conToUpdate = con;
+                context.Entry(conToUpdate).CurrentValues.SetValues(con);
                 context.SaveChanges();
             }
         }
