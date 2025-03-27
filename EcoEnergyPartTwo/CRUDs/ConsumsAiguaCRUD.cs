@@ -29,7 +29,7 @@ namespace EcoEnergyBBDD.CRUDs
                 context.SaveChanges();
             }
         }
-        public static IList<ConsumsAigua> SelectAll(ApplicationDbContext context)
+        public static List<ConsumsAigua> SelectAll(ApplicationDbContext context)
         {
             return context.ConsumsAigua.ToList();
         }

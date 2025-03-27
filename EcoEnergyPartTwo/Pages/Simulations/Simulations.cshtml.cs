@@ -1,25 +1,30 @@
-using CsvHelper;
-using System.Globalization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using EcoEnergyPartTwo.Models;
+using EcoEnergyBBDD.CRUDs;
+using EcoEnergyBBDD.Data;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EcoEnergyPartTwo.Pages.Simulations
 {
 	public class SimulationModel : PageModel
 	{
-        public List<dynamic> Simulations { get; set; } = new();
+        public List<Simulacions> Simulations { get; set; }
+        private readonly ApplicationDbContext _context = new();
+
         public void OnGet()
         {
-            string path = "../EcoEnergyPartTwo/wwwroot/Resources/Files/simulacions_energia.csv";
-
-            if (System.IO.File.Exists(path))
+            Simulations = SimulacionsCRUD.SelectAll(_context);
+        }
+        public IActionResult OnPostDelete(int id)
+        {
+            Simulacions sim = _context.Simulacions.Find(id);
+            if (sim != null)
             {
-                using (var reader = new StreamReader(path))
-                using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
-                {
-                    Simulations = csv.GetRecords<dynamic>().ToList();
-                }
+                _context.Simulacions.Remove(sim);
+                _context.SaveChanges();
+                Simulations = SimulacionsCRUD.SelectAll(_context);
             }
+            return RedirectToPage();
         }
     }
 }

@@ -6,36 +6,55 @@
 
 <div id="SimulationList">
     <h2>Llistat de Simulacions</h2>
-    @if (Model.Simulations.Count == 0)
+    @if (Model.Simulations.Count == 0 || Model.Simulations == null)
     {
         <p>No hi ha cap simulació emmagatzemada.</p>
     }
-    <p><strong>Total de simulacions:</strong> @Model.Simulations.Count</p>
+    else
+    {
+        <p><strong>Total de simulacions:</strong> @Model.Simulations.Count</p>
 
-    <table class="table">
-        <thead>
-            <tr>
-                @if (Model.Simulations.Any())
-                {
-                    // Mostrar les columnes de la primera fila (dinàmicament)
-                    foreach (var header in ((IDictionary<string, object>)Model.Simulations[0]).Keys)
-                    {
-                        <th>@header</th>
-                    }
-                }
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var simulation in Model.Simulations)
-            {
+        <table class="table">
+            <thead>
                 <tr>
-                    @foreach (var value in ((IDictionary<string, object>)simulation).Values)
-                    {
-                        <td>@value</td>
-                    }
+                    <th class="id-column">Id</th>
+                    <th>Hores de sol / Cabal d'aigua / Velocitat del vent</th>
+                    <th>Tipus de simulació</th>
+                    <th>Data</th>
+                    <th>Rati</th>
+                    <th>Energia generada</th>
+                    <th>Cost kWh</th>
+                    <th>Preu kWh</th>
+                    <th>Cost total del kWh</th>
+                    <th>Preu total del kWh</th>
+                    <th class="table-operations">Esborrar / Editar</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Simulations)
+                {
+                    <tr>
+                        <td class="id-column">@item.Id</td>
+                        <td>@item.SpecificField</td>
+                        <td>@item.SimulationType</td>
+                        <td>@item.SimulationDate</td>
+                        <td>@item.Rati</td>
+                        <td>@item.GeneratedEnergy</td>
+                        <td>@item.CostkWh</td>
+                        <td>@item.PricekWh</td>
+                        <td>@item.TotalCostkWh</td>
+                        <td>@item.TotalPricekWh</td>
+                        <td class="table-operations">
+                            <form method="post" asp-page-handler="Delete">
+                                <input type="hidden" name="id" value="@item.Id" />
+                                <button type="submit">❌</button>
+                            </form>
+                            <button onclick="window.location.href='/Simulations/UpdateSimulation?id=@item.Id'" class="pad-top">⚙️</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
     <button onclick="window.location.href='/Simulations/AddSimulation'" class="ButtonLeft">Afegir Simulació</button>
 </div>

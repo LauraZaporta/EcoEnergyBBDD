@@ -1,5 +1,6 @@
 ﻿using EcoEnergyBBDD.Data;
 using EcoEnergyPartTwo.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace EcoEnergyBBDD.CRUDs
 {
@@ -24,11 +25,11 @@ namespace EcoEnergyBBDD.CRUDs
             var simToUpdate = context.Simulacions.Find(sim.Id);
             if (simToUpdate != null)
             {
-                simToUpdate = sim;
+                context.Entry(simToUpdate).CurrentValues.SetValues(sim);
                 context.SaveChanges();
             }
         }
-        public static IList<Simulacions> SelectAll(ApplicationDbContext context)
+        public static List<Simulacions> SelectAll(ApplicationDbContext context)
         {
             return context.Simulacions.ToList();
         }
