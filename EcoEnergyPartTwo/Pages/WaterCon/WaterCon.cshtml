@@ -11,7 +11,7 @@
         <p>No hi ha cap simulació emmagatzemada.</p>
     }
     <p><strong>Total de simulacions:</strong> @Model.waterConsumptions.Count</p>
-    <button onclick="window.location.href='/WaterCon/AddWaterCon'" class="ButtonLeft">Afegir Consum</button>
+    <button onclick="window.location.href='/WaterCon/AddWaterCon'" class="ButtonLeft" id="WaterConListAddButton">Afegir Consum</button>
     <table class="table">
         <thead>
             <tr>
@@ -45,6 +45,7 @@
                             <input type="hidden" name="id" value="@item.Id" />
                             <button type="submit">❌</button>
                         </form>
+                        <button onclick="window.location.href='/WaterCon/UpdateWaterCon?id=@item.Id'" class="pad-top">⚙️</button>
                     </td>
                 </tr>
             }
