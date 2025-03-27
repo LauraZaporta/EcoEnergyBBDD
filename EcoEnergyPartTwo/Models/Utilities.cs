@@ -1,5 +1,8 @@
 ﻿using System.Drawing;
 using System.Text.RegularExpressions;
+using EcoEnergyBBDD.CRUDs;
+using EcoEnergyBBDD.Data;
+using EcoEnergyBBDD.Models.BD;
 
 namespace EcoEnergyPartTwo.Models.Utilities
 {
@@ -164,6 +167,27 @@ namespace EcoEnergyPartTwo.Models.Utilities
         }
 
         /// <summary>
+        /// Passa els valors d'un WaterConRecord (formulari) a un objecte ConsumsAigua per a la introducció a una BBDD.
+        /// </summary>
+        /// <param name="con">El WaterConRecord que es vol emmagatzemar a la BBDD.</param>
+        /// <returns>Retorna un objecte ConsumsAigua llest per ser emmagatzemat.</returns>
+        public static ConsumsAigua AssignWaterConForBD(WaterConRecord con)
+        {
+            ConsumsAigua conBD = new ConsumsAigua
+            {
+                Year = con.Year,
+                CodeComarca = con.CodeComarca,
+                Comarca = con.Comarca,
+                Pobl = con.Pobl,
+                DomXarxa = con.DomXarxa,
+                AltresActivitats = con.AltresActivitats,
+                Total = con.Total,
+                ConsumDom = con.ConsumDom
+            };
+            return conBD;
+        }
+
+        /// <summary>
         /// Comprova si una string compleix un format de data concret (mm/yyyy) i no supera l'any actual
         /// </summary>
         /// <param name="data">String que representa una data en formaat mes/any.</param>
@@ -178,6 +202,31 @@ namespace EcoEnergyPartTwo.Models.Utilities
                 return any <= anyActual;
             }
             return false;
+        }
+
+        /// <summary>
+        /// Fa el seeding del csv de consums d'aigua a la base de dades
+        /// </summary>
+        /// <param name="context">El context de la base de dades</param>
+        /// <param name="waterConCsv">La llista de registres del csv</param>
+        /// <returns>Retorna void.</returns>
+        public static void Seed(ApplicationDbContext context, List<WaterConRecord> waterConCsv)
+        {
+            foreach(WaterConRecord row in waterConCsv)
+            {
+                ConsumsAigua consum = new ConsumsAigua
+                {
+                    Year = row.Year,
+                    CodeComarca = row.CodeComarca,
+                    Comarca = row.Comarca,
+                    Pobl = row.Pobl,
+                    DomXarxa = row.DomXarxa,
+                    AltresActivitats = row.AltresActivitats,
+                    Total = row.Total,
+                    ConsumDom = row.ConsumDom
+                };
+                ConsumsAiguaCRUD.Insert(context, consum);
+            }
         }
     }
 }
