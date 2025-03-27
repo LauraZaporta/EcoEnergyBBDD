@@ -17,13 +17,8 @@ namespace EcoEnergyPartTwo.Pages.Simulations
         }
         public IActionResult OnPostDelete(int id)
         {
-            Simulacions sim = _context.Simulacions.Find(id);
-            if (sim != null)
-            {
-                _context.Simulacions.Remove(sim);
-                _context.SaveChanges();
-                Simulations = SimulacionsCRUD.SelectAll(_context);
-            }
+            SimulacionsCRUD.DeleteById(_context, id);
+            Simulations = SimulacionsCRUD.SelectAll(_context);
             return RedirectToPage();
         }
     }
