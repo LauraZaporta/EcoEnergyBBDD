@@ -54,6 +54,28 @@ namespace EcoEnergyPartTwo.Models.Utilities
         }
 
         /// <summary>
+        /// Passa els valors d'un SistemaSolar a un objecte Simulacions per a la introducció a una BBDD.
+        /// </summary>
+        /// <param name="solar">El SistemaSolar que es vol emmagatzemar a la BBDD.</param>
+        /// <returns>Retorna un objecte Simulacions llest per ser emmagatzemat.</returns>
+        public static Simulacions AssignSolarForBD(SistemaSolar solar)
+        {
+            Simulacions sim = new Simulacions
+            {
+                SpecificField = solar.HoursOfSun,
+                SimulationType = solar.SimulationType,
+                SimulationDate = solar.SimulationDate,
+                Rati = solar.Rati,
+                GeneratedEnergy = solar.GeneratedEnergy,
+                CostkWh= solar.CostkWh,
+                PricekWh = solar.PricekWh,
+                TotalCostkWh = solar.CostTotal,
+                TotalPricekWh = solar.PriceTotal
+            };
+            return sim;
+        }
+
+        /// <summary>
         /// Passa els valors d'un formulari a un objecte SistemaHidroelectric i el retorna.
         /// </summary>
         /// <param name="form">El formulari del qual es volen prendre els paràmetres.</param>
@@ -73,6 +95,28 @@ namespace EcoEnergyPartTwo.Models.Utilities
             hidro.AssignTotalCost();
             hidro.AssignTotalPrice();
             return hidro;
+        }
+
+        /// <summary>
+        /// Passa els valors d'un SistemaHidroelèctric a un objecte Simulacions per a la introducció a una BBDD.
+        /// </summary>
+        /// <param name="hidro">El SistemaHidroelèctric que es vol emmagatzemar a la BBDD.</param>
+        /// <returns>Retorna un objecte Simulacions llest per ser emmagatzemat.</returns>
+        public static Simulacions AssignHidroForBD(SistemaHidroelectric hidro)
+        {
+            Simulacions sim = new Simulacions
+            {
+                SpecificField = hidro.WaterFlow,
+                SimulationType = hidro.SimulationType,
+                SimulationDate = hidro.SimulationDate,
+                Rati = hidro.Rati,
+                GeneratedEnergy = hidro.GeneratedEnergy,
+                CostkWh = hidro.CostkWh,
+                PricekWh = hidro.PricekWh,
+                TotalCostkWh = hidro.CostTotal,
+                TotalPricekWh = hidro.PriceTotal
+            };
+            return sim;
         }
 
         /// <summary>
@@ -98,51 +142,25 @@ namespace EcoEnergyPartTwo.Models.Utilities
         }
 
         /// <summary>
-        /// Detecta els objectes d'una llista WaterConRecord que tenen tendència creixent en consum d'aigua,
-        /// emmagatzema els noms de les seves respectives comarques en una llista d'strings i la retorna.
+        /// Passa els valors d'un SistemaEòlic a un objecte Simulacions per a la introducció a una BBDD.
         /// </summary>
-        /// <param name="waterConsumptions">Llista de la que es volen extreure les "comarques creixents".</param>
-        /// <returns>Retorna una llista amb els noms de les comarques creixents.</returns>
-        public static List<string?> DetectGrowingConsums(List<WaterConRecord> waterConsumptions)
+        /// <param name="hidro">El SistemaEòlic que es vol emmagatzemar a la BBDD.</param>
+        /// <returns>Retorna un objecte Simulacions llest per ser emmagatzemat.</returns>
+        public static Simulacions AssignEolicForBD(SistemaEolic eolic)
         {
-            List<string?> growingMunicipalities = new();
-
-            //Agrupem per comarca
-            var groupedByComarca = waterConsumptions
-            .GroupBy(w => w.Comarca);
-
-            foreach (var comarcaGroup in groupedByComarca)
+            Simulacions sim = new Simulacions
             {
-                //Agrupem per any i fem la mitjana del consum
-                var yearlyAverage = comarcaGroup
-                    .GroupBy(w => w.Year)
-                    .Select(g => new
-                    {
-                        Year = g.Key,
-                        AverageConsum = g.Average(x => x.Total)
-                    })
-                    .OrderBy(x => x.Year)
-                    .ToList();
-                var lastYears = yearlyAverage
-                .OrderByDescending(x => x.Year)
-                .Take(5)
-                .OrderBy(x => x.Year)
-                .ToList();
-                bool isGrowing = true;
-                for (int i = 0; i < lastYears.Count - 1; i++)
-                {
-                    if (lastYears[i + 1].AverageConsum <= lastYears[i].AverageConsum)
-                    {
-                        isGrowing = false;
-                        i = lastYears.Count;
-                    }
-                }
-                if (isGrowing)
-                {
-                    growingMunicipalities.Add(comarcaGroup.Key);
-                }
-            }
-            return growingMunicipalities;
+                SpecificField = eolic.WindSpeed,
+                SimulationType =eolic.SimulationType,
+                SimulationDate = eolic.SimulationDate,
+                Rati = eolic.Rati,
+                GeneratedEnergy = eolic.GeneratedEnergy,
+                CostkWh = eolic.CostkWh,
+                PricekWh = eolic.PricekWh,
+                TotalCostkWh = eolic.CostTotal,
+                TotalPricekWh = eolic.PriceTotal
+            };
+            return sim;
         }
 
         /// <summary>

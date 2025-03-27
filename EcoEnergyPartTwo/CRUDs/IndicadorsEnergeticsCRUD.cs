@@ -29,7 +29,7 @@ namespace EcoEnergyBBDD.CRUDs
                 context.SaveChanges();
             }
         }
-        public static IList<IndicadorsEnergetics> SelectAll(ApplicationDbContext context)
+        public static List<IndicadorsEnergetics> SelectAll(ApplicationDbContext context)
         {
             return context.IndicadorsEnergetics.ToList();
         }

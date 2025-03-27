@@ -11,16 +11,20 @@ using EcoEnergyBBDD.CRUDs;
 
 namespace EcoEnergyPartTwo.Pages.Simulations
 {
-    public class AddSimulationModel : PageModel
+    public class UpdateSimulationModel : PageModel
     {
         [BindProperty]
 		public SimulationForm Sim { get; set; }
 
+        [BindProperty(SupportsGet = true)] // Rep la ID per URL
+        public int Id { get; set; }
+
         private ApplicationDbContext context = new();
-        private Simulacions simForBD = new();
 
         public IActionResult OnPost()
         {
+            Simulacions simForBDUpdate = new Simulacions();
+            
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -31,18 +35,19 @@ namespace EcoEnergyPartTwo.Pages.Simulations
                 {
                     case "Solar":
                         SistemaSolar solar = Utilities.AssignSimulationToSolar(Sim);
-                        simForBD = Utilities.AssignSolarForBD(solar);
+                        simForBDUpdate = Utilities.AssignSolarForBD(solar);
                         break;
                     case "Hidroelèctrica":
                         SistemaHidroelectric hidro = Utilities.AssignSimulationToHidro(Sim);
-                        simForBD = Utilities.AssignHidroForBD(hidro);
+                        simForBDUpdate = Utilities.AssignHidroForBD(hidro);
                         break;
                     default:
                         SistemaEolic eolic = Utilities.AssignSimulationToEolic(Sim);
-                        simForBD = Utilities.AssignEolicForBD(eolic);
+                        simForBDUpdate = Utilities.AssignEolicForBD(eolic);
                         break;
                 }
-                SimulacionsCRUD.Insert(context, simForBD);
+                simForBDUpdate.Id = Id;
+                SimulacionsCRUD.Update(context, simForBDUpdate);
             }
             return RedirectToPage("/Simulations/Simulations");
         }

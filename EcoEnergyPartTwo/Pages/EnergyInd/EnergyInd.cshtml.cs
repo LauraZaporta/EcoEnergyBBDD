@@ -9,10 +9,6 @@ namespace EcoEnergyPartTwo.Pages.WaterCon
     public class EnergyIndModel : PageModel
     {
         public List<EnergyIndRecord> energyIndicators { get; set; } = new(); //Unirà el csv i el json
-        public List<EnergyIndRecord> prodNetaSuperior { get; set; } = new();
-        public List<EnergyIndRecord> gasolinaSuperior { get; set; } = new();
-        public List<string> mitjanaProdNetaPerAny { get; set; } = new();
-        public List<EnergyIndRecord> demElecProdDispSuperior { get; set; } = new();
 
         public void OnGet()
         {
@@ -85,35 +81,6 @@ namespace EcoEnergyPartTwo.Pages.WaterCon
                     };
                 }
             }
-
-            // Producció neta superior a 3000 ascendent
-            prodNetaSuperior = energyIndicators
-                .Where(x => x.CDEEBCProdNeta > 3000)
-                .OrderBy(x => x.CDEEBCProdNeta)
-                .ToList();
-
-            // Gasolina superior a 100 descendent
-            gasolinaSuperior = energyIndicators
-                .Where(x => x.CCACGasolinaAuto > 100)
-                .OrderByDescending(x => x.CCACGasolinaAuto)
-                .ToList();
-
-            // Mitjana de producció neta per any ascendent
-            mitjanaProdNetaPerAny = energyIndicators
-                .GroupBy(x => x.Data.Substring(3, 4))
-                .Select(g => new
-                {
-                    Any = g.Key, 
-                    MitjanaProdNeta = Math.Round(g.Average(x => x.CDEEBCProdNeta), 2)
-                })
-                .OrderBy(x => x.Any)
-                .Select(x => $"Mitjana {x.Any}: {x.MitjanaProdNeta}")
-                .ToList();
-
-            // Demanda elèctrica superior a 4000 i producció disponible inferior a 300
-            demElecProdDispSuperior = energyIndicators
-                .Where(x => x.CDEEBCDemandaElectr > 4000 && x.CDEEBCProdDisp < 300)
-                .ToList();
         }
     }
 }

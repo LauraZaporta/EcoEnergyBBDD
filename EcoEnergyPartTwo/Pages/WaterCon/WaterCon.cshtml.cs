@@ -10,10 +10,6 @@ namespace EcoEnergyPartTwo.Pages.WaterCon
     public class WaterConModel : PageModel
     {
         public List<WaterConRecord> waterConsumptions { get; set; } = new(); //Unirà el csv i l'xml
-        public List<ConsumPerComarca> consumPerComarca { get; set; } = new();
-        public List<WaterConRecord> topTenMunicipis { get; set; } = new();
-        public List<string?> suspiciousConsumptions { get; set; } = new();
-        public List<string?> growingMunicipalities { get; set; } = new();
 
         public void OnGet()
         {
@@ -48,31 +44,6 @@ namespace EcoEnergyPartTwo.Pages.WaterCon
                 .ToList();
                 waterConsumptions.AddRange(xmlRecords); //Afegeix xml
             }
-
-            var mostRecentConsum = waterConsumptions.Max(x => x.Year);
-            topTenMunicipis = waterConsumptions
-                .Where(x => x.Year == mostRecentConsum)
-                .OrderByDescending(x => x.Total)
-                .Take(10)
-                .ToList();
-
-            consumPerComarca = waterConsumptions
-                .GroupBy(x => x.Comarca)
-                .Select(g => new ConsumPerComarca
-                {
-                    Comarca = g.Key,
-                    MitjanaConsum = g.Average(x => x.Total)
-                })
-                .OrderByDescending(x => x.MitjanaConsum)
-                .ToList();
-
-            suspiciousConsumptions = waterConsumptions
-                .Where(x => x.Total > 9999999)
-                .Select(x => x.Comarca)
-                .Distinct()
-                .ToList();
-
-            growingMunicipalities = Utilities.DetectGrowingConsums(waterConsumptions);
         }
     }
 }
