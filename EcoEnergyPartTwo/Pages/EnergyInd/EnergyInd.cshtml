@@ -1,5 +1,5 @@
 ﻿@page
-@model EcoEnergyPartTwo.Pages.WaterCon.EnergyIndModel
+@model EcoEnergyPartTwo.Pages.EnergyInd.EnergyIndModel
 @{
     ViewData["Title"] = "EnergyInd";
 }
@@ -16,7 +16,8 @@
         <table>
             <thead>
                 <tr>
-                    @foreach (var prop in typeof(EcoEnergyPartTwo.Models.EnergyIndRecord).GetProperties())
+                    <th class="table-operations">Esborrar / Editar</th>
+                    @foreach (var prop in typeof(EcoEnergyBBDD.Models.BD.IndicadorsEnergetics).GetProperties())
                     {
                         <th>@prop.Name</th>
                     }
@@ -26,7 +27,14 @@
                 @foreach (var record in Model.energyIndicators)
                 {
                     <tr>
-                        @foreach (var prop in typeof(EcoEnergyPartTwo.Models.EnergyIndRecord).GetProperties())
+                        <td class="table-operations">
+                            <form method="post" asp-page-handler="Delete">
+                                <input type="hidden" name="id" value="@record.Id" />
+                                <button type="submit">❌</button>
+                            </form>
+                            <button onclick="window.location.href='/WaterCon/UpdateWaterCon?id=@record.Id'" class="pad-top">⚙️</button>
+                        </td>
+                        @foreach (var prop in typeof(EcoEnergyBBDD.Models.BD.IndicadorsEnergetics).GetProperties())
                         {
                             <td>@(prop.GetValue(record))</td>
                         }

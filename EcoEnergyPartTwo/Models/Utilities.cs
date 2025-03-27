@@ -209,7 +209,7 @@ namespace EcoEnergyPartTwo.Models.Utilities
         /// </summary>
         /// <param name="context">El context de la base de dades</param>
         /// <param name="waterConCsv">La llista de registres del csv</param>
-        /// <returns>Retorna void.</returns>
+        /// <returns>Retorna void</returns>
         public static void Seed(ApplicationDbContext context, List<WaterConRecord> waterConCsv)
         {
             foreach(WaterConRecord row in waterConCsv)
@@ -226,6 +226,64 @@ namespace EcoEnergyPartTwo.Models.Utilities
                     ConsumDom = row.ConsumDom
                 };
                 ConsumsAiguaCRUD.Insert(context, consum);
+            }
+        }
+
+        /// <summary>
+        /// Fa el seeding del csv d'indicadors energètics a la base de dades
+        /// </summary>
+        /// <param name="context">El context de la base de dades</param>
+        /// <param name="energyIndCsv">La llista de registres del csv</param>
+        /// <returns>Retorna void</returns>
+        public static void Seed(ApplicationDbContext context, List<EnergyIndRecord> energyIndCsv)
+        {
+            foreach (EnergyIndRecord row in energyIndCsv)
+            {
+                IndicadorsEnergetics indicador = new IndicadorsEnergetics
+                {
+                    Data = row.Data,
+                    PBEEHidroelectr = row.PBEEHidroelectr,
+                    PBEECarbo = row.PBEECarbo,
+                    PBEEGasNat = row.PBEEGasNat,
+                    PBEEFuelOil = row.PBEEFuelOil,
+                    PBEECiclComb = row.PBEECiclComb,
+                    PBEENuclear = row.PBEENuclear,
+                    CDEEBCProdBruta = row.CDEEBCProdBruta,
+                    CDEEBCConsumAux = row.CDEEBCConsumAux,
+                    CDEEBCProdNeta = row.CDEEBCProdNeta,
+                    CDEEBCConsumBomb = row.CDEEBCConsumBomb,
+                    CDEEBCProdDisp = row.CDEEBCProdDisp,
+                    CDEEBCTotVendesXarxaCentral = row.CDEEBCTotVendesXarxaCentral,
+                    CDEEBCSaldoIntercanviElectr = row.CDEEBCSaldoIntercanviElectr,
+                    CDEEBCDemandaElectr = row.CDEEBCDemandaElectr,
+                    CDEEBCPercentMercatRegulat = row.CDEEBCPercentMercatRegulat,
+                    CDEEBCPercentMercatLliure = row.CDEEBCPercentMercatLliure,
+                    FEEIndustria = row.FEEIndustria,
+                    FEETerciari = row.FEETerciari,
+                    FEEDomestic = row.FEEDomestic,
+                    FEEPrimari = row.FEEPrimari,
+                    FEEEnergetic = row.FEEEnergetic,
+                    FEEIConsObrPub = row.FEEIConsObrPub,
+                    FEEISiderFoneria = row.FEEISiderFoneria,
+                    FEEIMetalurgia = row.FEEIMetalurgia,
+                    FEEIIndusVidre = row.FEEIIndusVidre,
+                    FEEICimentsCalGuix = row.FEEICimentsCalGuix,
+                    FEEIAltresMatConstr = row.FEEIAltresMatConstr,
+                    FEEIQuimPetroquim = row.FEEIQuimPetroquim,
+                    FEEIConstrMedTrans = row.FEEIConstrMedTrans,
+                    FEEIRestaTransforMetal = row.FEEIRestaTransforMetal,
+                    FEEIAlimBegudaTabac = row.FEEIAlimBegudaTabac,
+                    FEEITextilConfecCuirCalcat = row.FEEITextilConfecCuirCalcat,
+                    FEEIPastaPaperCartro = row.FEEIPastaPaperCartro,
+                    FEEIAltresIndus = row.FEEIAltresIndus,
+                    DGGNPuntFrontEnagas = row.DGGNPuntFrontEnagas,
+                    DGGNDistrAlimGNL = row.DGGNDistrAlimGNL,
+                    DGGNConsumGNCentrTerm = row.DGGNConsumGNCentrTerm,
+                    CCACGasolinaAuto = row.CCACGasolinaAuto,
+                    CCACGasoilA = row.CCACGasoilA
+
+                };
+                IndicadorsEnergeticsCRUD.Insert(context, indicador);
             }
         }
     }

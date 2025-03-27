@@ -25,7 +25,7 @@ namespace EcoEnergyBBDD.CRUDs
             var indToUpdate = context.IndicadorsEnergetics.Find(ind.Id);
             if (indToUpdate != null)
             {
-                indToUpdate = ind;
+                context.Entry(indToUpdate).CurrentValues.SetValues(ind);
                 context.SaveChanges();
             }
         }

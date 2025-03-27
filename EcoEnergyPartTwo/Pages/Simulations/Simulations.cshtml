@@ -17,6 +17,7 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th class="table-operations">Esborrar / Editar</th>
                     <th class="id-column">Id</th>
                     <th>Hores de sol / Cabal d'aigua / Velocitat del vent</th>
                     <th>Tipus de simulació</th>
@@ -27,13 +28,19 @@
                     <th>Preu kWh</th>
                     <th>Cost total del kWh</th>
                     <th>Preu total del kWh</th>
-                    <th class="table-operations">Esborrar / Editar</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model.Simulations)
                 {
                     <tr>
+                        <td class="table-operations">
+                            <form method="post" asp-page-handler="Delete">
+                                <input type="hidden" name="id" value="@item.Id" />
+                                <button type="submit">❌</button>
+                            </form>
+                            <button onclick="window.location.href='/Simulations/UpdateSimulation?id=@item.Id'" class="pad-top">⚙️</button>
+                        </td>
                         <td class="id-column">@item.Id</td>
                         <td>@item.SpecificField</td>
                         <td>@item.SimulationType</td>
@@ -44,13 +51,6 @@
                         <td>@item.PricekWh</td>
                         <td>@item.TotalCostkWh</td>
                         <td>@item.TotalPricekWh</td>
-                        <td class="table-operations">
-                            <form method="post" asp-page-handler="Delete">
-                                <input type="hidden" name="id" value="@item.Id" />
-                                <button type="submit">❌</button>
-                            </form>
-                            <button onclick="window.location.href='/Simulations/UpdateSimulation?id=@item.Id'" class="pad-top">⚙️</button>
-                        </td>
                     </tr>
                 }
             </tbody>

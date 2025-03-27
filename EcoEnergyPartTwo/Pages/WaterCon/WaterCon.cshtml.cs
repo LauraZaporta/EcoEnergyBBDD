@@ -36,13 +36,8 @@ namespace EcoEnergyPartTwo.Pages.WaterCon
         }
         public IActionResult OnPostDelete(int id)
         {
-            ConsumsAigua con = _context.ConsumsAigua.Find(id);
-            if (con != null)
-            {
-                _context.ConsumsAigua.Remove(con);
-                _context.SaveChanges();
-                waterConsumptions = ConsumsAiguaCRUD.SelectAll(_context);
-            }
+            ConsumsAiguaCRUD.DeleteById(_context, id);
+            waterConsumptions = ConsumsAiguaCRUD.SelectAll(_context);
             return RedirectToPage();
         }
     }
