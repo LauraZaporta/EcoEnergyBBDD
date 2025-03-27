@@ -16,7 +16,7 @@ namespace EcoEnergyPartTwo.Pages.Simulations
         [BindProperty]
 		public SimulationForm Sim { get; set; }
 
-        private ApplicationDbContext context = new();
+        private readonly ApplicationDbContext _context = new();
         private Simulacions simForBD = new();
 
         public IActionResult OnPost()
@@ -42,7 +42,7 @@ namespace EcoEnergyPartTwo.Pages.Simulations
                         simForBD = Utilities.AssignEolicForBD(eolic);
                         break;
                 }
-                SimulacionsCRUD.Insert(context, simForBD);
+                SimulacionsCRUD.Insert(_context, simForBD);
             }
             return RedirectToPage("/Simulations/Simulations");
         }

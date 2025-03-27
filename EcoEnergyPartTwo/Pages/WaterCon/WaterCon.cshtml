@@ -15,16 +15,23 @@
     <table class="table">
         <thead>
             <tr>
-                @foreach (var prop in typeof(EcoEnergyPartTwo.Models.WaterConRecord).GetProperties())
-                {
-                    <th>@prop.Name</th>
-                }
+                <th class="id-column">Id</th>
+                <th>Any</th>
+                <th>Codi de la comarca</th>
+                <th>Comarca</th>
+                <th>Municipi</th>
+                <th>Xarxa domèstica</th>
+                <th>Altres activitats</th>
+                <th>Total</th>
+                <th>Consum domèstic per càpita</th>
+                <th class="table-operations">Esborrar / Editar</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model.waterConsumptions)
             {
                 <tr>
+                    <td>@item.Id</td>
                     <td>@item.Year</td>
                     <td>@item.CodeComarca</td>
                     <td>@item.Comarca</td>
@@ -33,6 +40,12 @@
                     <td>@item.AltresActivitats</td>
                     <td>@item.Total</td>
                     <td>@item.ConsumDom</td>
+                    <td class="table-operations">
+                        <form method="post" asp-page-handler="Delete">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit">❌</button>
+                        </form>
+                    </td>
                 </tr>
             }
         </tbody>
