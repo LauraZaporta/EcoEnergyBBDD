@@ -6,16 +6,19 @@ using EcoEnergyPartTwo.Models;
 using EcoEnergyPartTwo.Models.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 
 namespace EcoEnergyPartTwo.Pages.WaterCon
 {
-    public class AddEnergyIndModel : PageModel
+    public class UpdateEnergyIndModel : PageModel
     {
         [BindProperty]
         public EnergyIndRecord EI { get; set; }
-        private readonly ApplicationDbContext _context = new();
 
+        [BindProperty(SupportsGet = true)] // Rep la ID per URL
+        public int Id { get; set; }
+
+        private readonly ApplicationDbContext _context = new();
+        
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
@@ -25,7 +28,8 @@ namespace EcoEnergyPartTwo.Pages.WaterCon
             else
             {
                 IndicadorsEnergetics indicadorBD = Utilities.AssignEnergyIndForBD(EI);
-                IndicadorsEnergeticsCRUD.Insert(_context, indicadorBD);
+                indicadorBD.Id = Id;
+                IndicadorsEnergeticsCRUD.Update(_context, indicadorBD);
             }
             return RedirectToPage("/EnergyInd/EnergyInd");
         }
