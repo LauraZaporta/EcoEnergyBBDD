@@ -188,6 +188,59 @@ namespace EcoEnergyPartTwo.Models.Utilities
         }
 
         /// <summary>
+        /// Passa els valors d'un EnergyIndRecord (formulari) a un objecte IndicadorsEnergètics per a la introducció a una BBDD.
+        /// </summary>
+        /// <param name="ind">El EnergyIndRecord que es vol emmagatzemar a la BBDD.</param>
+        /// <returns>Retorna un objecte ConsumsAigua llest per ser emmagatzemat.</returns>
+        public static IndicadorsEnergetics AssignEnergyIndForBD(EnergyIndRecord ind)
+        {
+            IndicadorsEnergetics indBD = new IndicadorsEnergetics
+            {
+                Data = ind.Data,
+                PBEEHidroelectr = ind.PBEEHidroelectr,
+                PBEECarbo = ind.PBEECarbo,
+                PBEEGasNat = ind.PBEEGasNat,
+                PBEEFuelOil = ind.PBEEFuelOil,
+                PBEECiclComb = ind.PBEECiclComb,
+                PBEENuclear = ind.PBEENuclear,
+                CDEEBCProdBruta = ind.CDEEBCProdBruta,
+                CDEEBCConsumAux = ind.CDEEBCConsumAux,
+                CDEEBCProdNeta = ind.CDEEBCProdNeta,
+                CDEEBCConsumBomb = ind.CDEEBCConsumBomb,
+                CDEEBCProdDisp = ind.CDEEBCProdDisp,
+                CDEEBCTotVendesXarxaCentral = ind.CDEEBCTotVendesXarxaCentral,
+                CDEEBCSaldoIntercanviElectr = ind.CDEEBCSaldoIntercanviElectr,
+                CDEEBCDemandaElectr = ind.CDEEBCDemandaElectr,
+                CDEEBCPercentMercatRegulat = ind.CDEEBCPercentMercatRegulat,
+                CDEEBCPercentMercatLliure = ind.CDEEBCPercentMercatLliure,
+                FEEIndustria = ind.FEEIndustria,
+                FEETerciari = ind.FEETerciari,
+                FEEDomestic = ind.FEEDomestic,
+                FEEPrimari = ind.FEEPrimari,
+                FEEEnergetic = ind.FEEEnergetic,
+                FEEIConsObrPub = ind.FEEIConsObrPub,
+                FEEISiderFoneria = ind.FEEISiderFoneria,
+                FEEIMetalurgia = ind.FEEIMetalurgia,
+                FEEIIndusVidre = ind.FEEIIndusVidre,
+                FEEICimentsCalGuix = ind.FEEICimentsCalGuix,
+                FEEIAltresMatConstr = ind.FEEIAltresMatConstr,
+                FEEIQuimPetroquim = ind.FEEIQuimPetroquim,
+                FEEIConstrMedTrans = ind.FEEIConstrMedTrans,
+                FEEIRestaTransforMetal = ind.FEEIRestaTransforMetal,
+                FEEIAlimBegudaTabac = ind.FEEIAlimBegudaTabac,
+                FEEITextilConfecCuirCalcat = ind.FEEITextilConfecCuirCalcat,
+                FEEIPastaPaperCartro = ind.FEEIPastaPaperCartro,
+                FEEIAltresIndus = ind.FEEIAltresIndus,
+                DGGNPuntFrontEnagas = ind.DGGNPuntFrontEnagas,
+                DGGNDistrAlimGNL = ind.DGGNDistrAlimGNL,
+                DGGNConsumGNCentrTerm = ind.DGGNConsumGNCentrTerm,
+                CCACGasolinaAuto = ind.CCACGasolinaAuto,
+                CCACGasoilA = ind.CCACGasoilA
+            };
+            return indBD;
+        }
+
+        /// <summary>
         /// Comprova si una string compleix un format de data concret (mm/yyyy) i no supera l'any actual
         /// </summary>
         /// <param name="data">String que representa una data en formaat mes/any.</param>
@@ -281,7 +334,6 @@ namespace EcoEnergyPartTwo.Models.Utilities
                     DGGNConsumGNCentrTerm = row.DGGNConsumGNCentrTerm,
                     CCACGasolinaAuto = row.CCACGasolinaAuto,
                     CCACGasoilA = row.CCACGasoilA
-
                 };
                 IndicadorsEnergeticsCRUD.Insert(context, indicador);
             }
