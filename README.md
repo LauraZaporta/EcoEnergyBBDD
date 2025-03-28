@@ -9,4 +9,6 @@ i els fitxers; Els dos tipus no són junts (per exemple, la que registra els con
 mateixa classe) per tal de controlar la correcta lectura de fitxers i la validació per client i servidor dels formularis, a més d'assegurar la manipulació correcta de les dades 
 de la BD. Bàsicament es separen les funcionalitats.
 
+S'han afegit tots els camps de les classes de la pràctica anterior ja que a classe es va comentar sobre la possibilitat.
+
 Link de la documentació: https://docs.google.com/document/d/10HobswTsUQ3RXd0xFacjPw8AytcJHfx711yWdfqOgVA/edit?usp=sharing
