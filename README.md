@@ -8,3 +8,5 @@ A part, cal fer una observació sobre les classes que obtenen informació de la 
 i els fitxers; Els dos tipus no són junts (per exemple, la que registra els consums d'aigua a la BD i la que llegeix les entrades del formulari de consums i el fitxer csv no són la 
 mateixa classe) per tal de controlar la correcta lectura de fitxers i la validació per client i servidor dels formularis, a més d'assegurar la manipulació correcta de les dades 
 de la BD. Bàsicament es separen les funcionalitats.
+
+Link de la documentació: https://docs.google.com/document/d/10HobswTsUQ3RXd0xFacjPw8AytcJHfx711yWdfqOgVA/edit?usp=sharing
